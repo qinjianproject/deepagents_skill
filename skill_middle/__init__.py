@@ -6,8 +6,8 @@ Public API:
 - SkillMetadata: Type definition for skill metadata
 """
 
-from skills.load import SkillMetadata, list_skills
-from skills.middleware import SkillsMiddleware
+from skill_middle.load import SkillMetadata, list_skills
+from skill_middle.middleware import SkillsMiddleware
 
 __all__ = [
     "SkillsMiddleware",
