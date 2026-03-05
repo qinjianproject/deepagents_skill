@@ -23,3 +23,9 @@
 
 
 我想用skill，因此在设计系统提示词的时候也要把skill考虑进去
+
+
+
+
+1. 各种skill.md的补全，summary和report需要规定输出的格式，summary不用保存文件
+2. 补充各个tools的具体实现

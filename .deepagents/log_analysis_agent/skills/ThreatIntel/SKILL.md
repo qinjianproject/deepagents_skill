@@ -1,6 +1,7 @@
 ---
 name: ThreatIntel
 description: 查询外部威胁情报（如 IP 誉、恶意文件 Hash）。
+
 ---
 
 # RuleMatch Skill

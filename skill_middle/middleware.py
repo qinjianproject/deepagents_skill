@@ -52,50 +52,99 @@ class SkillsStateUpdate(TypedDict):
     """List of loaded skill metadata (name, description, path)."""
 
 
-# Skills System Documentation
+# # Skills System Documentation
+# SKILLS_SYSTEM_PROMPT = """
+
+# ## Skills System
+
+# You have access to a skills library that provides specialized capabilities and domain knowledge.
+
+# {skills_locations}
+
+# **Available Skills:**
+
+# {skills_list}
+
+# **How to Use Skills (Progressive Disclosure):**
+
+# Skills follow a **progressive disclosure** pattern - you know they exist (name + description above), but you only read the full instructions when needed:
+
+# 1. **Recognize when a skill applies**: Check if the user's task matches any skill's description
+# 2. **Read the skill's full instructions**: The skill list above shows the exact path to use with read_file
+# 3. **Follow the skill's instructions**: SKILL.md contains step-by-step workflows, best practices, and examples
+# 4. **Access supporting files**: Skills may include Python scripts, configs, or reference docs - use absolute paths
+
+# **When to Use Skills:**
+# - When the user's request matches a skill's domain (e.g., "research X" → web-research skill)
+# - When you need specialized knowledge or structured workflows
+# - When a skill provides proven patterns for complex tasks
+
+# **Skills are Self-Documenting:**
+# - Each SKILL.md tells you exactly what the skill does and how to use it
+# - The skill list above shows the full path for each skill's SKILL.md file
+
+# **Executing Skill Scripts:**
+# Skills may contain Python scripts or other executable files. Always use absolute paths from the skill list.
+
+# **Example Workflow:**
+
+# User: "Can you research the latest developments in quantum computing?"
+
+# 1. Check available skills above → See "web-research" skill with its full path
+# 2. Read the skill using the path shown in the list
+# 3. Follow the skill's research workflow (search → organize → synthesize)
+# 4. Use any helper scripts with absolute paths
+
+# Remember: Skills are tools to make you more capable and consistent. When in doubt, check if a skill exists for the task!
+# """
+
+
 SKILLS_SYSTEM_PROMPT = """
 
-## Skills System
+## 技能系统 (Skills System)
 
-You have access to a skills library that provides specialized capabilities and domain knowledge.
+你可以访问一个技能库，它提供了专业的能力和领域知识。
 
 {skills_locations}
 
-**Available Skills:**
+**可用技能：**
 
 {skills_list}
 
-**How to Use Skills (Progressive Disclosure):**
+**如何使用技能（渐进式揭示）：**
 
-Skills follow a **progressive disclosure** pattern - you know they exist (name + description above), but you only read the full instructions when needed:
+技能遵循“渐进式揭示”模式——你知道它们的存在（通过上方的名称和描述），但仅在需要时才读取完整指令：
 
-1. **Recognize when a skill applies**: Check if the user's task matches any skill's description
-2. **Read the skill's full instructions**: The skill list above shows the exact path to use with read_file
-3. **Follow the skill's instructions**: SKILL.md contains step-by-step workflows, best practices, and examples
-4. **Access supporting files**: Skills may include Python scripts, configs, or reference docs - use absolute paths
+1. 识别技能适用场景：检查用户的任务是否与任何技能的描述相匹配。
+2. 读取技能的完整指令：上述技能列表显示了配合 read_file 使用的准确路径。
+3. 遵循技能指令：SKILL.md 包含了分步工作流、最佳实践和示例。
+4. 访问支持文件：技能可能包含 Python 脚本、配置文件或参考文档——请使用绝对路径。
 
-**When to Use Skills:**
-- When the user's request matches a skill's domain (e.g., "research X" → web-research skill)
-- When you need specialized knowledge or structured workflows
-- When a skill provides proven patterns for complex tasks
+**何时使用技能：**
 
-**Skills are Self-Documenting:**
-- Each SKILL.md tells you exactly what the skill does and how to use it
-- The skill list above shows the full path for each skill's SKILL.md file
+- 当用户的请求与某项技能的领域匹配时（例如：“研究 X” → 使用 web-research 技能）。
+- 当你需要专业知识或结构化工作流时。
+- 当某项技能为复杂任务提供经过验证的模式时。
 
-**Executing Skill Scripts:**
-Skills may contain Python scripts or other executable files. Always use absolute paths from the skill list.
+**技能是自说明的：**
 
-**Example Workflow:**
+- 每个 SKILL.md 都会明确告知你该技能的功能以及如何使用它。
+- 上方的技能列表显示了每个技能 SKILL.md 文件的完整路径。
 
-User: "Can you research the latest developments in quantum computing?"
+**执行技能脚本：**
 
-1. Check available skills above → See "web-research" skill with its full path
-2. Read the skill using the path shown in the list
-3. Follow the skill's research workflow (search → organize → synthesize)
-4. Use any helper scripts with absolute paths
+技能可能包含 Python 脚本或其他可执行文件。请始终使用技能列表中的绝对路径。
 
-Remember: Skills are tools to make you more capable and consistent. When in doubt, check if a skill exists for the task!
+**工作流示例：**
+
+用户：“你能调研量子计算的最新进展吗？”
+
+1. 检查上方可用技能 → 发现带有完整路径的“web-research”技能。
+2. 使用列表中显示的路径读取该技能。
+3. 遵循该技能的研究工作流（搜索 → 组织 → 综合）。
+4. 使用绝对路径调用任何辅助脚本。
+
+记住：技能是让你更强大、更稳健的工具。如有疑问，请检查是否存在适用于该任务的技能！
 """
 
 

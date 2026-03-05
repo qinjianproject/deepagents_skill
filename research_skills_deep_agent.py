@@ -49,6 +49,7 @@ def make_backend(runtime):
         default=StateBackend(runtime),  
         routes={
             # 显式指定 virtual_mode 消除警告
+            "/results/"
             "/fs/": FilesystemBackend(root_dir="./fs", virtual_mode=True),
             "/memories/": StoreBackend(runtime)
         }
