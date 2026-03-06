@@ -17,5 +17,5 @@
 
 
 后续工作：
-1. 各种skill.md的补全，summary和report需要规定输出的格式，summary不用保存文件
+1. 各种skill.md的补全
 2. 补充各个tools的具体实现
