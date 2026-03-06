@@ -1,31 +1,21 @@
+整体架构：
+- agent：
+  - 主agent：log_analysis_agent: 日志分析agent，控制整个工作流程
+  - 子agent1: log_interpreter_subagent：日志解释subagent，负责日志的初步解释工作
+  - 子agent2: vulnerability_analysis_subagent：漏洞分析subagent，负责从异常日志中挖掘出整体的研究员行为和潜在的漏洞
 
 
-我想设计一个终端日志分析智能体的提示词。该智能体的大体工作流程如下：
-
-"""
-
-1. 首先使用日志解释subagent去进行日志解释
-
-2. 根据解析后的结果调用各种reference和script来进行信息补充，作为分析日志的线索。具体包括LogSearch（向量化相似日志检索.md（里面可以设计一些script方法来进行工具调用检索））、ThreatIntel（威胁情报查询.md）、RuleMatch（内部规则查询.md）等等
-
-2. 告知智能体每次查询后得到结果都要做总结(具体总结的要求写到"总结.md中"，也作为一个reference。)，然后将总结的结果存入某个文件夹中。
-
-3. 综合当前结果以及之前总结的线索来判断“分析该日志所收集到的信息是否充足”, 如果判断为不充足，则要询问用户是否继续收集线索。如果用户同意，则基于当前的内容继续收集。如果用户不同意，就基于当前线索进行分析，但要注意对不确定的内容不要擅加判断。
-
-"""
-
-
-
-补充信息：
-
-日志解释subagent，可以使用skill，tools，将解释后的日志输出出来。“解释”的含义具体来说就是把原始结构化的日志中的一些字段进行自然语言解释，使得大模型能够理解当前字段在终端背景下的具体含义。
-要限制日志解释subagent的输出结构
-
-
-我想用skill，因此在设计系统提示词的时候也要把skill考虑进去
+源码：
+- skill_middle: skill中间件，用于实现skill功能
+- src: 具体实现
+    - log_analysis_agent.py: 整体流程
+    - prompts.py: 保存三个agent的系统提示词
+    - tools.py: 大模型工具
+    - utils.py: 定义辅助函数，目前实现了格式化agent输出的功能
+- .deepagents: 保存各个agent可以使用的skill
 
 
 
-
+后续工作：
 1. 各种skill.md的补全，summary和report需要规定输出的格式，summary不用保存文件
 2. 补充各个tools的具体实现
